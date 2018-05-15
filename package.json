@@ -44,6 +44,8 @@
     "google-map-react": "^1.0.1",
     "prop-types": "^15.6.1",
     "react": "^0.14.6",
-    "react-dom": "^0.14.6"
+    "react-dom": "^0.14.6",
+    "react-geocode": "0.0.7",
+    "react-google-geocoder": "^0.1.7"
   }
 }

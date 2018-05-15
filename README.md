@@ -58,7 +58,12 @@ Your changes will appear without reloading the browser like in [this video](http
 
 This boilerplate project is a mirror plus a few additions from gaearon's react boilerplate (https://github.com/gaearon/react-hot-boilerplate)
 
-### Technologies used
+#### Technologies used
 [Google Maps API](https://developers.google.com/maps/documentation/javascript/?hl=es-419)
 
 [google-map-react](https://www.npmjs.com/package/google-map-react)
+
+[react-google-geocoder](https://www.npmjs.com/package/react-google-geocoder)
+
+#### Resources used
+[stackvoerflow](https://stackoverflow.com/questions/98449/how-to-convert-an-address-to-a-latitude-longitude)
