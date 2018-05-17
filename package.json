@@ -41,7 +41,13 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
-    "react": "^0.14.6",
-    "react-dom": "^0.14.6"
+    "@types/googlemaps": "^3.30.8",
+    "@types/markerclustererplus": "^2.1.33",
+    "@types/react": "^15.6.15",
+    "axios": "^0.18.0",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "react-google-geocoder": "^0.1.7",
+    "react-google-maps": "^9.4.5"
   }
 }
