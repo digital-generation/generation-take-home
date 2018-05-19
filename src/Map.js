@@ -17,57 +17,52 @@ const divStyle = {
   alignItems: 'flex-start'
 };
 
-const InitMap = withGoogleMap(props =>
-  <GoogleMap
-    ref={props.onMapLoad}
-    defaultZoom={11}
-    defaultCenter={{ lat: 19.432608, lng: -99.133209 }}
-  >
-    {/* {props.markers.map( (marker, i) => {
-      <Marker
-        key={i}
-        position={ {lat: 19.405274529, lng: -99.181835108}}
-     />
-    })} */}
-    {/* <Marker
-      lat={19.405274529} lng={-99.181835108}
-    /> */}
-    <Marker lat={19.28786} lng={-99.65324}/>
-  </GoogleMap>
+
+const InitMap = withGoogleMap(props => {
+  // console.log('props', props);
+  return (
+    <GoogleMap
+      defaultZoom={11}
+      defaultCenter={{ lat: 19.432608, lng: -99.133209 }}
+    >
+      {props.stores.map( (store, i) => {
+        return <Marker key={i} position={{ lat: store.results[0].geometry.location.lat, lng: store.results[0].geometry.location.lng }} />
+      })}
+    </GoogleMap>
+  )
+}
 );
 
 export default class Map extends Component {
 
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     stores:[],
-  //     markers: [
-  //       {position: { lat: 19.405274529, lng: -99.181835108 }}
-  //     ]
-  //   }
-  // }
-  //
-  // componentWillMount = () => {
-  //   axios.get('../store_directory.json')
-  //   .then( response => {
-  //
-  //     response.data.map( (store, i) => {
-  //
-  //       let url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' + keys.googleMapsKey.apiKey + '&address="'+ store.Address + '"'
-  //
-  //       axios.get(url)
-  //       .then( response => {
-  //         this.setState({
-  //           stores: this.state.stores.concat(response.data)
-  //         })
-  //
-  //       })
-  //       .catch(err => console.log(err))
-  //     })
-  //   })
-  //   .catch(err => console.log(err))
-  // }
+  constructor() {
+    super()
+    this.state = {
+      stores: []
+    }
+  }
+
+  componentWillMount = () => {
+    axios.get('../store_directory.json')
+    .then( response => {
+
+      response.data.map( (store, i) => {
+
+        let url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' + keys.googleMapsKey.apiKey + '&address="'+ store.Address + '"'
+
+        axios.get(url)
+        .then( response => {
+          this.setState({
+            stores: this.state.stores.concat(response.data)
+          })
+
+        })
+        .catch(err => console.log(err))
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
 
   render() {
     // console.log(this.state.stores);
@@ -80,7 +75,7 @@ export default class Map extends Component {
             googleMapURL={url}
             containerElement={<div style={{ height: '100%' }} />}
             mapElement={<div style={{ height: '100%' }} />}
-            markers={this.state.markers}
+            stores={this.state.stores}
           />
         </div>
         <Stores />
