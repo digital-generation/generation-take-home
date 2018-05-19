@@ -17,6 +17,7 @@ const divStyle = {
   alignItems: 'flex-start'
 };
 
+
 const InitMap = withGoogleMap(props => {
   // console.log('props', props);
   return (
@@ -30,7 +31,6 @@ const InitMap = withGoogleMap(props => {
     </GoogleMap>
   )
 }
-
 );
 
 export default class Map extends Component {
@@ -62,6 +62,7 @@ export default class Map extends Component {
     })
     .catch(err => console.log(err))
   }
+
 
   render() {
     // console.log(this.state.stores);
