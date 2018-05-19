@@ -14,7 +14,7 @@ const divStyle = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-around',
-  alignItems: 'flex-start'
+  alignItems: 'flex-start',
 };
 
 
@@ -26,19 +26,23 @@ const InitMap = withGoogleMap(props => {
       defaultCenter={{ lat: 19.432608, lng: -99.133209 }}
     >
       {props.stores.map( (store, i) => {
-        return <Marker key={i} position={{ lat: store.results[0].geometry.location.lat, lng: store.results[0].geometry.location.lng }} />
+        return <Marker
+          key={i}
+          position={{ lat: store.results[0].geometry.location.lat, lng: store.results[0].geometry.location.lng }}
+          onClick={ () => props.onMarkerClick(store)}
+        />
       })}
     </GoogleMap>
   )
-}
-);
+});
 
 export default class Map extends Component {
 
   constructor() {
     super()
     this.state = {
-      stores: []
+      stores: [],
+      favoriteStores: []
     }
   }
 
@@ -63,22 +67,30 @@ export default class Map extends Component {
     .catch(err => console.log(err))
   }
 
+  handleMarkerClick = (event) => {
+      // console.log('clicked', event.results[0]);
+      this.setState({
+        favoriteStores: this.state.favoriteStores.concat(event.results[0])
+      })
+    }
 
   render() {
     // console.log(this.state.stores);
+    console.log('this.state.favoriteStores', this.state.favoriteStores);
     const { markers, center, zoom } = this.props
     const url = 'https://maps.googleapis.com/maps/api/js?key='+keys.googleMapsKey.apiKey+'&v=3.exp&libraries=geometry,drawing,places'
     return (
       <div style={divStyle}>
-        <div style={{ height: '100vh', width: '50%' }}>
+        <div style={{ height: '100vh', width: '200vh' }}>
           <InitMap
             googleMapURL={url}
             containerElement={<div style={{ height: '100%' }} />}
             mapElement={<div style={{ height: '100%' }} />}
             stores={this.state.stores}
+            onMarkerClick={this.handleMarkerClick}
           />
         </div>
-        <Stores />
+        <Stores favoriteStores={this.state.favoriteStores}/>
       </div>
     );
   }
