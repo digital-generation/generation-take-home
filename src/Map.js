@@ -7,15 +7,22 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-import Stores from './Stores';
+// import Stores from './Stores';
 import keys from '../config';
 
 const divStyle = {
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'space-around',
+  justifyContent: 'center',
   alignItems: 'flex-start',
-};
+  padding:'10px'
+}
+
+const storesStyle = {
+  width: '30vw',
+  paddingLeft:'20px'
+}
+
 
 
 const InitMap = withGoogleMap(props => {
@@ -26,6 +33,7 @@ const InitMap = withGoogleMap(props => {
       defaultCenter={{ lat: 19.432608, lng: -99.133209 }}
     >
       {props.stores.map( (store, i) => {
+        console.log('store', store);
         return <Marker
           key={i}
           position={{ lat: store.results[0].geometry.location.lat, lng: store.results[0].geometry.location.lng }}
@@ -76,7 +84,7 @@ export default class Map extends Component {
 
   render() {
     // console.log(this.state.stores);
-    console.log('this.state.favoriteStores', this.state.favoriteStores);
+    // console.log('this.state.favoriteStores', this.state.favoriteStores);
     const { markers, center, zoom } = this.props
     const url = 'https://maps.googleapis.com/maps/api/js?key='+keys.googleMapsKey.apiKey+'&v=3.exp&libraries=geometry,drawing,places'
     return (
@@ -84,13 +92,19 @@ export default class Map extends Component {
         <div style={{ height: '100vh', width: '200vh' }}>
           <InitMap
             googleMapURL={url}
-            containerElement={<div style={{ height: '100%' }} />}
-            mapElement={<div style={{ height: '100%' }} />}
+            containerElement={<div style={{ height: '92vh' }} />}
+            mapElement={<div style={{ height: '92vh' }} />}
             stores={this.state.stores}
             onMarkerClick={this.handleMarkerClick}
           />
         </div>
-        <Stores favoriteStores={this.state.favoriteStores}/>
+        <div style={storesStyle}>
+          {this.state.favoriteStores.map( (favoriteStore, i) => {
+            console.log('favoriteStore[0].address_components[1].long_name', favoriteStore.address_components[1].long_name);
+            return <p key={i}>{favoriteStore.formatted_address}</p>
+          })}
+        </div>
+        {/* <Stores favoriteStores={this.state.favoriteStores}/> */}
       </div>
     );
   }
