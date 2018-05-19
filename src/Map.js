@@ -17,18 +17,20 @@ const divStyle = {
   alignItems: 'flex-start'
 };
 
-const InitMap = withGoogleMap(props =>
-  <GoogleMap
-    defaultZoom={11}
-    defaultCenter={{ lat: 19.432608, lng: -99.133209 }}
-  >
-    {/* {this.state.stores.map( (store, i) => {
-      return <Marker lat={store.results[0].geometry.location.lat} lng={store.results[0].geometry.location.lng} />
-    })} */}
-    <Marker
-      position={{ lat: 19.28786, lng: -99.65324 }}
-    />
-  </GoogleMap>
+const InitMap = withGoogleMap(props => {
+  // console.log('props', props);
+  return (
+    <GoogleMap
+      defaultZoom={11}
+      defaultCenter={{ lat: 19.432608, lng: -99.133209 }}
+    >
+      {props.stores.map( (store, i) => {
+        return <Marker key={i} position={{ lat: store.results[0].geometry.location.lat, lng: store.results[0].geometry.location.lng }} />
+      })}
+    </GoogleMap>
+  )
+}
+
 );
 
 export default class Map extends Component {
@@ -36,11 +38,7 @@ export default class Map extends Component {
   constructor() {
     super()
     this.state = {
-      stores: [],
-      markers: [
-        {position: { lat: 19.405274529, lng: -99.181835108 }},
-        {position: { lat: 19.403979246, lng: -99.122440271 }}
-      ]
+      stores: []
     }
   }
 
@@ -66,7 +64,7 @@ export default class Map extends Component {
   }
 
   render() {
-    console.log(this.state.stores);
+    // console.log(this.state.stores);
     const { markers, center, zoom } = this.props
     const url = 'https://maps.googleapis.com/maps/api/js?key='+keys.googleMapsKey.apiKey+'&v=3.exp&libraries=geometry,drawing,places'
     return (
@@ -76,7 +74,7 @@ export default class Map extends Component {
             googleMapURL={url}
             containerElement={<div style={{ height: '100%' }} />}
             mapElement={<div style={{ height: '100%' }} />}
-            markers={this.state.markers}
+            stores={this.state.stores}
           />
         </div>
         <Stores />
