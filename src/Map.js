@@ -26,12 +26,15 @@ const InitMap = withGoogleMap(props => {
       defaultCenter={{ lat: 19.432608, lng: -99.133209 }}
     >
       {props.stores.map( (store, i) => {
-        return <Marker key={i} position={{ lat: store.results[0].geometry.location.lat, lng: store.results[0].geometry.location.lng }} />
+        return <Marker
+          key={i}
+          position={{ lat: store.results[0].geometry.location.lat, lng: store.results[0].geometry.location.lng }}
+          onClick={ () => props.onMarkerClick(store)}
+        />
       })}
     </GoogleMap>
   )
-}
-);
+});
 
 export default class Map extends Component {
 
@@ -63,6 +66,9 @@ export default class Map extends Component {
     .catch(err => console.log(err))
   }
 
+  handleMarkerClick = (event) => {
+      console.log('clicked', event.results[0]);
+    }
 
   render() {
     // console.log(this.state.stores);
@@ -76,6 +82,7 @@ export default class Map extends Component {
             containerElement={<div style={{ height: '100%' }} />}
             mapElement={<div style={{ height: '100%' }} />}
             stores={this.state.stores}
+            onMarkerClick={this.handleMarkerClick}
           />
         </div>
         <Stores />
