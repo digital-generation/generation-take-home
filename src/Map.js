@@ -14,7 +14,7 @@ const divStyle = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-around',
-  alignItems: 'flex-start'
+  alignItems: 'flex-start',
 };
 
 
@@ -41,7 +41,8 @@ export default class Map extends Component {
   constructor() {
     super()
     this.state = {
-      stores: []
+      stores: [],
+      favoriteStores: []
     }
   }
 
@@ -67,16 +68,20 @@ export default class Map extends Component {
   }
 
   handleMarkerClick = (event) => {
-      console.log('clicked', event.results[0]);
+      // console.log('clicked', event.results[0]);
+      this.setState({
+        favoriteStores: this.state.favoriteStores.concat(event.results[0])
+      })
     }
 
   render() {
     // console.log(this.state.stores);
+    console.log('this.state.favoriteStores', this.state.favoriteStores);
     const { markers, center, zoom } = this.props
     const url = 'https://maps.googleapis.com/maps/api/js?key='+keys.googleMapsKey.apiKey+'&v=3.exp&libraries=geometry,drawing,places'
     return (
       <div style={divStyle}>
-        <div style={{ height: '100vh', width: '50%' }}>
+        <div style={{ height: '100vh', width: '200vh' }}>
           <InitMap
             googleMapURL={url}
             containerElement={<div style={{ height: '100%' }} />}
@@ -85,7 +90,7 @@ export default class Map extends Component {
             onMarkerClick={this.handleMarkerClick}
           />
         </div>
-        <Stores />
+        <Stores favoriteStores={this.state.favoriteStores}/>
       </div>
     );
   }
