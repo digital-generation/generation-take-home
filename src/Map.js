@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {
-  GoogleMapLoader,
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-} from "react-google-maps";
-// import Stores from './Stores';
+import InitMap from './InitMap'
 import keys from '../config';
 
 const divStyle = {
@@ -15,34 +8,21 @@ const divStyle = {
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'flex-start',
-  padding:'10px'
+  margin: '-20px',
+  padding:'20px',
+  backgroundColor: 'rgba(254, 234, 165, .2)'
 }
 
 const storesStyle = {
   width: '30vw',
-  paddingLeft:'20px'
+  height: '87vh',
+  margin:'0 0 0 10px',
+  padding: '10px',
+  color: 'rgba(0,0,0,.7)',
+  backgroundColor: 'rgba(255,255,255, .7)',
+  border: '2px solid rgba(255,255,255,1)',
+  'overflow': 'scroll'
 }
-
-
-
-const InitMap = withGoogleMap(props => {
-  // console.log('props', props);
-  return (
-    <GoogleMap
-      defaultZoom={11}
-      defaultCenter={{ lat: 19.432608, lng: -99.133209 }}
-    >
-      {props.stores.map( (store, i) => {
-        console.log('store', store);
-        return <Marker
-          key={i}
-          position={{ lat: store.results[0].geometry.location.lat, lng: store.results[0].geometry.location.lng }}
-          onClick={ () => props.onMarkerClick(store)}
-        />
-      })}
-    </GoogleMap>
-  )
-});
 
 export default class Map extends Component {
 
@@ -50,6 +30,7 @@ export default class Map extends Component {
     super()
     this.state = {
       stores: [],
+      locations: [],
       favoriteStores: []
     }
   }
@@ -57,7 +38,9 @@ export default class Map extends Component {
   componentWillMount = () => {
     axios.get('../store_directory.json')
     .then( response => {
-
+      this.setState({
+        stores: response.data
+      })
       response.data.map( (store, i) => {
 
         let url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' + keys.googleMapsKey.apiKey + '&address="'+ store.Address + '"'
@@ -65,7 +48,7 @@ export default class Map extends Component {
         axios.get(url)
         .then( response => {
           this.setState({
-            stores: this.state.stores.concat(response.data)
+            locations: this.state.locations.concat(response.data)
           })
 
         })
@@ -76,35 +59,36 @@ export default class Map extends Component {
   }
 
   handleMarkerClick = (event) => {
-      // console.log('clicked', event.results[0]);
       this.setState({
         favoriteStores: this.state.favoriteStores.concat(event.results[0])
       })
     }
 
   render() {
-    // console.log(this.state.stores);
-    // console.log('this.state.favoriteStores', this.state.favoriteStores);
     const { markers, center, zoom } = this.props
     const url = 'https://maps.googleapis.com/maps/api/js?key='+keys.googleMapsKey.apiKey+'&v=3.exp&libraries=geometry,drawing,places'
     return (
       <div style={divStyle}>
-        <div style={{ height: '100vh', width: '200vh' }}>
+        <div style={{ height: '100vh', width: '150vh' }}>
           <InitMap
             googleMapURL={url}
             containerElement={<div style={{ height: '92vh' }} />}
             mapElement={<div style={{ height: '92vh' }} />}
-            stores={this.state.stores}
+            locations={this.state.locations}
             onMarkerClick={this.handleMarkerClick}
           />
         </div>
         <div style={storesStyle}>
-          {this.state.favoriteStores.map( (favoriteStore, i) => {
-            console.log('favoriteStore[0].address_components[1].long_name', favoriteStore.address_components[1].long_name);
-            return <p key={i}>{favoriteStore.formatted_address}</p>
-          })}
+          <h3>My Favorite Stores</h3>
+          <ol>
+            {this.state.favoriteStores.map( (favoriteStore, i) => {
+              return <li key={i}>
+                <p><strong>{this.state.stores[i].Name}: </strong><span>{favoriteStore.formatted_address}</span></p>
+              </li>
+            })}
+
+          </ol>
         </div>
-        {/* <Stores favoriteStores={this.state.favoriteStores}/> */}
       </div>
     );
   }
