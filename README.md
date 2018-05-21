@@ -7,6 +7,21 @@ in-person interview so that we can discuss the solution together.
 In cases where this is not possible, we may discuss the solution together
 over a followup phone call.
 
+### Technologies used
+[Google Maps API](https://developers.google.com/maps/documentation/javascript/?hl=es-419)
+
+[google-map-react](https://www.npmjs.com/package/google-map-react)
+
+[react-google-geocoder](https://www.npmjs.com/package/react-google-geocoder)
+
+[axios](https://www.npmjs.com/package/axios)
+
+### Resources used
+[stackvoerflow](https://stackoverflow.com/questions/98449/how-to-convert-an-address-to-a-latitude-longitude)
+
+[google-map-react-examples for basic Marker example](https://github.com/itsmichaeldiego/google-map-react-examples)
+
+
 ### What should you expect?
 
 We expect that the exercise will take anywhere from 2-5 hours to complete
@@ -58,7 +73,7 @@ Your changes will appear without reloading the browser like in [this video](http
 
 This boilerplate project is a mirror plus a few additions from gaearon's react boilerplate (https://github.com/gaearon/react-hot-boilerplate)
 
-#### Technologies used
+### Technologies used
 [Google Maps API](https://developers.google.com/maps/documentation/javascript/?hl=es-419)
 
 [google-map-react](https://www.npmjs.com/package/google-map-react)
@@ -67,7 +82,7 @@ This boilerplate project is a mirror plus a few additions from gaearon's react b
 
 [axios](https://www.npmjs.com/package/axios)
 
-#### Resources used
+### Resources used
 [stackvoerflow](https://stackoverflow.com/questions/98449/how-to-convert-an-address-to-a-latitude-longitude)
 
 [google-map-react-examples for basic Marker example](https://github.com/itsmichaeldiego/google-map-react-examples)
