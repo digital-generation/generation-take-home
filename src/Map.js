@@ -41,6 +41,7 @@ export default class Map extends Component {
       this.setState({
         stores: response.data
       })
+
       response.data.map( (store, i) => {
 
         let url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' + keys.googleMapsKey.apiKey + '&address="'+ store.Address + '"'
