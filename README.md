@@ -13,14 +13,14 @@ We expect that the exercise will take anywhere from 2-5 hours to complete
 depending on your familiarity with React and with the GoogleMaps API.
 
 We understand that this is a significant amount of time so we really appreciate
-the effort you put into it. 
+the effort you put into it.
 
 ### How should you submit your code?
 
-Any way you want - email us a zip, a link to your personal repo, etc. 
+Any way you want - email us a zip, a link to your personal repo, etc.
 Please include a couple screenshots of the app.
 
-### What if I don't know React? 
+### What if I don't know React?
 
 Feel free to submit a solution that meets the requirements, but without using React.
 React is an important part of our stack and you'll be using it every day so it's important
@@ -57,3 +57,17 @@ Your changes will appear without reloading the browser like in [this video](http
 ### Source
 
 This boilerplate project is a mirror plus a few additions from gaearon's react boilerplate (https://github.com/gaearon/react-hot-boilerplate)
+
+#### Technologies used
+[Google Maps API](https://developers.google.com/maps/documentation/javascript/?hl=es-419)
+
+[google-map-react](https://www.npmjs.com/package/google-map-react)
+
+[react-google-geocoder](https://www.npmjs.com/package/react-google-geocoder)
+
+[axios](https://www.npmjs.com/package/axios)
+
+#### Resources used
+[stackvoerflow](https://stackoverflow.com/questions/98449/how-to-convert-an-address-to-a-latitude-longitude)
+
+[google-map-react-examples for basic Marker example](https://github.com/itsmichaeldiego/google-map-react-examples)

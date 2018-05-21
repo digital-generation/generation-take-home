@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {
-  GoogleMapLoader,
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-} from "react-google-maps";
+import InitMap from './InitMap'
 import keys from '../config';
 
 const divStyle = {
@@ -14,31 +8,21 @@ const divStyle = {
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'flex-start',
-  padding:'10px'
+  margin: '-20px',
+  padding:'20px',
+  backgroundColor: 'rgba(254, 234, 165, .2)'
 }
 
 const storesStyle = {
   width: '30vw',
-  paddingLeft:'20px',
-  listStyleType: 'none'
+  height: '87vh',
+  margin:'0 0 0 10px',
+  padding: '10px',
+  color: 'rgba(0,0,0,.7)',
+  backgroundColor: 'rgba(255,255,255, .7)',
+  border: '2px solid rgba(255,255,255,1)',
+  'overflow': 'scroll'
 }
-
-const InitMap = withGoogleMap(props => {
-  return (
-    <GoogleMap
-      defaultZoom={11}
-      defaultCenter={{ lat: 19.432608, lng: -99.133209 }}
-    >
-      {props.locations.map( (store, i) => {
-        return <Marker
-          key={i}
-          position={{ lat: store.results[0].geometry.location.lat, lng: store.results[0].geometry.location.lng }}
-          onClick={ () => props.onMarkerClick(store)}
-        />
-      })}
-    </GoogleMap>
-  )
-});
 
 export default class Map extends Component {
 
@@ -85,7 +69,7 @@ export default class Map extends Component {
     const url = 'https://maps.googleapis.com/maps/api/js?key='+keys.googleMapsKey.apiKey+'&v=3.exp&libraries=geometry,drawing,places'
     return (
       <div style={divStyle}>
-        <div style={{ height: '100vh', width: '200vh' }}>
+        <div style={{ height: '100vh', width: '150vh' }}>
           <InitMap
             googleMapURL={url}
             containerElement={<div style={{ height: '92vh' }} />}
@@ -94,17 +78,16 @@ export default class Map extends Component {
             onMarkerClick={this.handleMarkerClick}
           />
         </div>
-        <div>
-          <ul style={storesStyle}>
-
+        <div style={storesStyle}>
+          <h3>My Favorite Stores</h3>
+          <ol>
             {this.state.favoriteStores.map( (favoriteStore, i) => {
               return <li key={i}>
-                <p>{this.state.stores[i].Name}: <span>{favoriteStore.formatted_address}</span></p>
-
+                <p><strong>{this.state.stores[i].Name}: </strong><span>{favoriteStore.formatted_address}</span></p>
               </li>
             })}
 
-          </ul>
+          </ol>
         </div>
       </div>
     );
