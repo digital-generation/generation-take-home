@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import axios from 'axios'
 import InitMap from './InitMap'
-import keys from '../config';
+import keys from '../config'
 
 const divStyle = {
   display: 'flex',
@@ -25,7 +25,6 @@ const storesStyle = {
 }
 
 export default class Map extends Component {
-
   constructor() {
     super()
     this.state = {
@@ -37,18 +36,14 @@ export default class Map extends Component {
   componentWillMount = () => {
     axios.get('../store_directory.json')
     .then( response => {
-
       response.data.map( (store, i) => {
-
         let url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' + keys.googleMapsKey.apiKey + '&address="'+ store.Address + '"'
-
         axios.get(url)
         .then( response => {
           let storeObject = {store: store, location: response.data}
           this.setState({
             storeLocations: this.state.storeLocations.concat(storeObject)
           })
-
         })
         .catch(err => console.log(err))
       })
@@ -64,7 +59,6 @@ export default class Map extends Component {
 
   render() {
     const url = 'https://maps.googleapis.com/maps/api/js?key='+keys.googleMapsKey.apiKey+'&v=3.exp&libraries=geometry,drawing,places'
-
     return (
       <div style={divStyle}>
         <div style={{ height: '100vh', width: '150vh' }}>
@@ -79,15 +73,13 @@ export default class Map extends Component {
         </div>
         <div style={storesStyle}>
           <h3>My Favorite Stores</h3>
-
             {this.state.favoriteStores.map( (favoriteStore, i) => {
               return <div key={i}>
                 <p><strong>{favoriteStore.store.Name}: </strong><span>{favoriteStore.location.results[0].formatted_address}</span></p>
               </div>
             })}
-
         </div>
       </div>
-    );
+    )
   }
 }

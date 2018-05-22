@@ -8,7 +8,6 @@ import {
 } from "react-google-maps"
 
 const InitMap = withGoogleMap(props => {
-  // console.log('props',props);
   return (
     <GoogleMap
       defaultZoom={11}
