@@ -8,16 +8,17 @@ import {
 } from "react-google-maps"
 
 const InitMap = withGoogleMap(props => {
+  // console.log('props',props);
   return (
     <GoogleMap
       defaultZoom={11}
       defaultCenter={{ lat: 19.432608, lng: -99.133209 }}
     >
-      {props.locations.map( (store, i) => {
+      {props.storeLocations.map( (storeLocation, i) => {
         return <Marker
           key={i}
-          position={{ lat: store.results[0].geometry.location.lat, lng: store.results[0].geometry.location.lng }}
-          onClick={ () => props.onMarkerClick(store)}
+          position={{ lat: storeLocation.location.results[0].geometry.location.lat, lng: storeLocation.location.results[0].geometry.location.lng }}
+          onClick={ () => props.onMarkerClick(storeLocation)}
         />
       })}
     </GoogleMap>
