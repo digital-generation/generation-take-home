@@ -17,12 +17,12 @@ const divStyle = {
 
 const storesStyle = {
   width: '30vw',
-  height: '87vh',
+  height: '87.5vh',
   marginLeft:'5px',
   padding: '10px',
   color: 'rgba(0,0,0,.7)',
   backgroundColor: 'rgba(255,255,255, .5)',
-  border: '2px solid rgb(255,255,255)',
+  border: '1px solid rgb(255,255,255)',
   'overflow': 'scroll'
 }
 
@@ -67,7 +67,7 @@ export default class Map extends Component {
           <InitMap
             googleMapURL={url}
             containerElement={<div style={{ height: '92vh' }} />}
-            mapElement={<div style={{ height: '92vh' }} />}
+            mapElement={<div style={{ height: '92vh', border:'1px solid rgb(255,255,255)' }} />}
             locations={this.state.locations}
             storeLocations={this.state.storeLocations}
             onMarkerClick={this.handleMarkerClick}
