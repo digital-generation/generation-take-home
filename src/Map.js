@@ -20,7 +20,7 @@ const storesStyle = {
   padding: '10px',
   color: 'rgba(0,0,0,.7)',
   backgroundColor: 'rgba(255,255,255, .7)',
-  border: '2px solid rgba(255,255,255,1)',
+  border: '1px solid rgb(255,255,255)',
   'overflow': 'scroll'
 }
 
@@ -57,13 +57,12 @@ export default class Map extends Component {
   }
 
   handleMarkerClick = (event) => {
-      this.setState({
-        favoriteStores: this.state.favoriteStores.concat(event)
-      })
-    }
+    this.setState({
+      favoriteStores: this.state.favoriteStores.concat(event)
+    })
+  }
 
   render() {
-    // console.log('this.state.storeLocations', this.state.storeLocations);
     const url = 'https://maps.googleapis.com/maps/api/js?key='+keys.googleMapsKey.apiKey+'&v=3.exp&libraries=geometry,drawing,places'
 
     return (
@@ -82,7 +81,6 @@ export default class Map extends Component {
           <h3>My Favorite Stores</h3>
 
             {this.state.favoriteStores.map( (favoriteStore, i) => {
-              console.log('favoriteStore', favoriteStore);
               return <div key={i}>
                 <p><strong>{favoriteStore.store.Name}: </strong><span>{favoriteStore.location.results[0].formatted_address}</span></p>
               </div>
