@@ -7,7 +7,7 @@ in-person interview so that we can discuss the solution together.
 In cases where this is not possible, we may discuss the solution together
 over a followup phone call.
 
-![app-screenshot.png](https://ipfs.busy.org/ipfs/QmZqHbT3ffvdrXKDghzagfYzBN9YaAmWzstx6mqnBt92Tt)
+![app-screenshot.png](https://ipfs.busy.org/ipfs/QmSLV4fmALMVdFeHg6jbmrkZxa6cXE7Ke31cCvWVaesSGg)
 
 ### Technologies used
 [Google Maps API](https://developers.google.com/maps/documentation/javascript/?hl=es-419)
