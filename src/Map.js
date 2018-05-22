@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import InitMap from './InitMap'
-import keys from '../config'
 
 const divStyle = {
   display: 'flex',
@@ -39,7 +38,7 @@ export default class Map extends Component {
     axios.get('../store_directory.json')
     .then( response => {
       response.data.map( (store, i) => {
-        let url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' + keys.googleMapsKey.apiKey + '&address="'+ store.Address + '"'
+        let url = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDZsH2zpgfR2b1GCfp3GY7LAe_NKMCv3dM&address="'+ store.Address + '"'
         axios.get(url)
         .then( response => {
           let storeObject = {store: store, location: response.data}
@@ -60,7 +59,7 @@ export default class Map extends Component {
   }
 
   render() {
-    const url = 'https://maps.googleapis.com/maps/api/js?key='+keys.googleMapsKey.apiKey+'&v=3.exp&libraries=geometry,drawing,places'
+    const url = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDZsH2zpgfR2b1GCfp3GY7LAe_NKMCv3dM&v=3.exp&libraries=geometry,drawing,places'
     return (
       <div style={divStyle}>
         <div style={{ height: '100vh', width: '150vh' }}>
