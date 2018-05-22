@@ -29,8 +29,7 @@ export default class Map extends Component {
   constructor() {
     super()
     this.state = {
-      stores: [],
-      locations: [],
+      storeLocations: [],
       favoriteStores: []
     }
   }
@@ -38,9 +37,6 @@ export default class Map extends Component {
   componentWillMount = () => {
     axios.get('../store_directory.json')
     .then( response => {
-      this.setState({
-        stores: response.data
-      })
 
       response.data.map( (store, i) => {
 
@@ -48,8 +44,9 @@ export default class Map extends Component {
 
         axios.get(url)
         .then( response => {
+          let storeObject = {store: store, location: response.data}
           this.setState({
-            locations: this.state.locations.concat(response.data)
+            storeLocations: this.state.storeLocations.concat(storeObject)
           })
 
         })
@@ -61,13 +58,14 @@ export default class Map extends Component {
 
   handleMarkerClick = (event) => {
       this.setState({
-        favoriteStores: this.state.favoriteStores.concat(event.results[0])
+        favoriteStores: this.state.favoriteStores.concat(event)
       })
     }
 
   render() {
-    const { markers, center, zoom } = this.props
+    // console.log('this.state.storeLocations', this.state.storeLocations);
     const url = 'https://maps.googleapis.com/maps/api/js?key='+keys.googleMapsKey.apiKey+'&v=3.exp&libraries=geometry,drawing,places'
+
     return (
       <div style={divStyle}>
         <div style={{ height: '100vh', width: '150vh' }}>
@@ -76,19 +74,20 @@ export default class Map extends Component {
             containerElement={<div style={{ height: '92vh' }} />}
             mapElement={<div style={{ height: '92vh' }} />}
             locations={this.state.locations}
+            storeLocations={this.state.storeLocations}
             onMarkerClick={this.handleMarkerClick}
           />
         </div>
         <div style={storesStyle}>
           <h3>My Favorite Stores</h3>
-          <ol>
+
             {this.state.favoriteStores.map( (favoriteStore, i) => {
-              return <li key={i}>
-                <p><strong>{this.state.stores[i].Name}: </strong><span>{favoriteStore.formatted_address}</span></p>
-              </li>
+              console.log('favoriteStore', favoriteStore);
+              return <div key={i}>
+                <p><strong>{favoriteStore.store.Name}: </strong><span>{favoriteStore.location.results[0].formatted_address}</span></p>
+              </div>
             })}
 
-          </ol>
         </div>
       </div>
     );
