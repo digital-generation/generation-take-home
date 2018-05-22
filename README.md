@@ -1,4 +1,4 @@
-![app-screenshot]('http://localhost:3000/app-screenshot.png')
+![app-screenshot.png](https://ipfs.busy.org/ipfs/QmZqHbT3ffvdrXKDghzagfYzBN9YaAmWzstx6mqnBt92Tt)
 
 Generation Take-Home Coding Challenge
 =================================
