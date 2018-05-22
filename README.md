@@ -1,3 +1,5 @@
+![app-screenshot]('http://localhost:3000/app-screenshot.png')
+
 Generation Take-Home Coding Challenge
 =================================
 This is a take-home coding challenge used to help evaluate candidates
