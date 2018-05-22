@@ -8,19 +8,21 @@ const divStyle = {
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'flex-start',
-  margin: '-20px',
-  padding:'20px',
-  backgroundColor: 'rgba(254, 234, 165, .2)'
+  margin: '-10px',
+  padding: '10px',
+  paddingBottom: '0',
+  marginBottom: '0',
+  backgroundColor: 'rgba(254, 234, 165, .5)'
 }
 
 const storesStyle = {
   width: '30vw',
   height: '87vh',
-  margin:'0 0 0 10px',
+  marginLeft:'5px',
   padding: '10px',
   color: 'rgba(0,0,0,.7)',
-  backgroundColor: 'rgba(255,255,255, .7)',
-  border: '1px solid rgb(255,255,255)',
+  backgroundColor: 'rgba(255,255,255, .5)',
+  border: '2px solid rgb(255,255,255)',
   'overflow': 'scroll'
 }
 
