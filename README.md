@@ -21,8 +21,6 @@ over a followup phone call.
 ### Resources used
 [stackvoerflow](https://stackoverflow.com/questions/98449/how-to-convert-an-address-to-a-latitude-longitude)
 
-[google-map-react-examples for basic Marker example](https://github.com/itsmichaeldiego/google-map-react-examples)
-
 
 ### What should you expect?
 
